@@ -3,13 +3,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import time
 
-columns = [
-    "NAME",
-    "TEAM",
-    "GOALS SCORED",
-    "GAMES",
-    "GOALS PER MATCHES"
-]
+columns = ["NAME", "TEAM", "GOALS SCORED", "GAMES", "GOALS PER MATCHES"]
 
 
 def get_player_stat(row):
@@ -31,9 +25,11 @@ def parse_content():
     driver = webdriver.Chrome()
     player_data = []
     for page_number in range(1, 38):
-        driver.get(f"https://www.laliga.com/en-GB/stats/laliga-easports/scorers/page/{page_number}")
+        driver.get(
+            f"https://www.laliga.com/en-GB/stats/laliga-easports/scorers/page/{page_number}"
+        )
         time.sleep(2)
-        table = driver.find_element(By.TAG_NAME, 'tbody')
+        table = driver.find_element(By.TAG_NAME, "tbody")
         rows = table.find_elements(By.TAG_NAME, "tr")
 
         for idx, row in enumerate(rows):
